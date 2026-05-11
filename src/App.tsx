@@ -8,8 +8,16 @@ const client = new Anthropic({
 });
 
 const message = await client.messages.create({
-  max_tokens: 1024,
-  messages: [{ role: "user", content: "Hello, Claude" }],
+  max_tokens: 4096,
+  tools: [{
+    type: 'web_search_20250305',
+    name: 'web_search',
+    max_uses: 5, // how many searches per request
+  }],
+  messages: [{
+    role: "user", 
+    content: "What's the news, today?" 
+  }],
   model: "claude-haiku-4-5"
 });
 
