@@ -1,4 +1,6 @@
 import { Anthropic } from "@anthropic-ai/sdk/client.js";
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 const client = new Anthropic({
   // Put your Anthropic SDK key in a .env.local file,
@@ -7,30 +9,42 @@ const client = new Anthropic({
   dangerouslyAllowBrowser: true
 });
 
-const message = await client.messages.create({
-  max_tokens: 4096,
-  tools: [{
-    type: 'web_search_20250305',
-    name: 'web_search',
-    max_uses: 5, // how many searches per request
-  }],
-  messages: [{
-    role: "user", 
-    content: "What's the news, today?" 
-  }],
-  model: "claude-haiku-4-5"
-});
-
 function App() {
+  const [news, setNews] = useState('');
 
-  const news = message.content
-    .filter(x => x.type === 'text')
-    .map(x => x.text)
-    .join('');
+  useEffect(() => {
+    let cancelled = false;
+    const stream = client.messages.stream({
+      max_tokens: 4096,
+      tools: [{
+        type: 'web_search_20260209',
+        name: 'web_search',
+        max_uses: 5, // how many searches per request,
+        allowed_callers: ['direct']
+      }],
+      system: 'Provide the news summary directly without preamble. Do not announce that you are searching or thinking.',
+      messages: [{
+        role: "user", 
+        content: "What's the news, today?" 
+      }],
+      model: "claude-haiku-4-5"
+    })
+    
+    stream.on('text', (chunk) => {
+      if (cancelled)
+        return;
+      setNews(t => t + chunk)
+    });
+    
+    return () => {
+      cancelled = true;
+      stream.abort();
+    };
+  }, [])
 
   return (
     <>
-      <div>{news}</div>
+      <ReactMarkdown>{news}</ReactMarkdown>
     </>
   )
 }
