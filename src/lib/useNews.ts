@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { stream } from './messages';
+import { stream } from "./messages";
 
 export default function () {
   const [news, setNews] = useState("");
@@ -9,7 +9,8 @@ export default function () {
     const res = stream();
 
     res.on("text", (chunk) => {
-      if (ctrl.signal.aborted) return;
+      if (ctrl.signal.aborted)
+        return;
       setNews((t) => t + chunk);
     });
 
