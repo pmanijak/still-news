@@ -1,3 +1,4 @@
+import { useState } from 'react'; 
 import useNews from './lib/useNews';
 import ReactMarkdown from 'react-markdown';
 import Settings from './Settings';
@@ -5,6 +6,7 @@ import Settings from './Settings';
 function App() {
   const now = new Date().toLocaleDateString('en-US', { dateStyle: 'long' });
   const news = useNews();
+  const [settings, setSettings] = useState({ sentiment: 2 });
 
   return (
     <div className="min-h-screen flex">
@@ -17,7 +19,10 @@ function App() {
       </main>
       
       <aside className="w-80 border-l border-gray-200 dark:border-gray-800 p-6 overflow-auto sticky top-0 h-screen">
-        <Settings/>
+        <Settings
+          value={settings}
+          onChange={setSettings}
+        />
       </aside>
     </div>
   );

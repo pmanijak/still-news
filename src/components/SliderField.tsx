@@ -1,4 +1,5 @@
 import Slider from './Slider';
+import { useId } from 'react';
 
 type SliderFieldProps = {
     label: string,
@@ -7,11 +8,15 @@ type SliderFieldProps = {
 }
 
 function SliderField({ label, value, onChange }: SliderFieldProps) {
+    const id = useId();
+
     return (
         <div className="space-y-2">
-            <label className="block text-center">{label}</label>
+            <label htmlFor={id} className="block text-center">
+                {label}
+            </label>
             <Slider
-                label={label}
+                id={id}
                 value={value}
                 onChange={onChange}
             />

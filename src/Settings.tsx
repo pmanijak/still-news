@@ -1,15 +1,21 @@
 import SliderField from './components/SliderField';
-import { useState } from 'react';
 
-function Settings() {
-  const [sentiment, setSentiment] = useState(2);
+type SettingsValue = {
+  sentiment: number
+}
 
+type SettingsProps = {
+  value: SettingsValue,
+  onChange: (obj: SettingsValue) => void
+}
+
+function Settings({ value, onChange }: SettingsProps) {
   return (
     <>
       <SliderField
         label="Sentiment"
-        value={sentiment}
-        onChange={setSentiment} />
+        value={value.sentiment}
+        onChange={(sentiment) => onChange({ ...value, sentiment })} />
     </>);
 }
 

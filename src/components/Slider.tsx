@@ -1,14 +1,14 @@
 import * as SliderPrimitive from "@radix-ui/react-slider";
 
 type SliderProps = {
-  label: string;
   value: number;
   onChange: (value: number) => void;
   max?: number;
   step?: number;
-};
+  id?: string;
+}
 
-function Slider({ label, value, onChange, max = 5, step = 1 }: SliderProps) {
+function Slider({ value, onChange, max = 5, step = 1, id }: SliderProps) {
   return (
     <SliderPrimitive.Root
       value={[value]}
@@ -21,8 +21,8 @@ function Slider({ label, value, onChange, max = 5, step = 1 }: SliderProps) {
         <SliderPrimitive.Range className="absolute h-full rounded-full bg-white" />
       </SliderPrimitive.Track>
       <SliderPrimitive.Thumb
+        id={id}
         className="block size-5 rounded-full bg-white shadow-thumb hover:bg-thumb-hover focus:outline-none focus:shadow-thumb-focus"
-        aria-label={label}
       />
     </SliderPrimitive.Root>
   );
