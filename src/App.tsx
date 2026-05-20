@@ -5,8 +5,9 @@ import Settings from './Settings';
 
 function App() {
   const now = new Date().toLocaleDateString('en-US', { dateStyle: 'long' });
-  const news = useNews();
-  const [settings, setSettings] = useState({ sentiment: 2 });
+  
+  const [settings, setSettings] = useState({ sentiment: 5 });
+  const news = useNews(settings);
 
   return (
     <div className="min-h-screen flex">

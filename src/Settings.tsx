@@ -1,6 +1,6 @@
 import SliderField from './components/SliderField';
 
-type SettingsValue = {
+export type SettingsValue = {
   sentiment: number
 }
 
