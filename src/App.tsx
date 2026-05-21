@@ -10,7 +10,7 @@ function App() {
     positive: 100,
     topics: [
       { label: "U.S. News", selected: true },
-      { label: "Politics", selected: false },
+      { label: "Politics", selected: true },
       { label: "Markets", selected: false },
       { label: "Sports", selected: false }
     ]
