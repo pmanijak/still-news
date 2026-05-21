@@ -13,7 +13,7 @@ function NewsSettings({ value, onChange }: NewsSettingsProps) {
   return (
     <>
       <SliderField
-        label="Sentiment"
+        label="Positive Sentiment"
         value={value.sentiment}
         onChange={(sentiment) => onChange({ ...value, sentiment })} />
     </>);

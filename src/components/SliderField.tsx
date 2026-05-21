@@ -12,7 +12,7 @@ function SliderField({ label, value, onChange }: SliderFieldProps) {
 
     return (
         <div className="space-y-2">
-            <label htmlFor={id} className="block text-center">
+            <label htmlFor={id} className="block">
                 {label}
             </label>
             <Slider
