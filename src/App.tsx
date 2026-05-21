@@ -6,8 +6,8 @@ import NewsSettings from './NewsSettings';
 function App() {
   const now = new Date().toLocaleDateString('en-US', { dateStyle: 'long' });
   
-  const [settings, setSettings] = useState({ sentiment: 5 });
-  const news = useNews(settings);
+  const [newsSettings, setNewsSettings] = useState({ positive: 100 });
+  const news = useNews(newsSettings);
 
   return (
     <div className="min-h-screen flex">
@@ -21,8 +21,8 @@ function App() {
       
       <aside className="w-80 border-l border-gray-200 dark:border-gray-800 p-6 overflow-auto sticky top-0 h-screen">
         <NewsSettings
-          value={settings}
-          onChange={setSettings}
+          value={newsSettings}
+          onChange={setNewsSettings}
         />
       </aside>
     </div>

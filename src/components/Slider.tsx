@@ -8,7 +8,7 @@ type SliderProps = {
   id?: string;
 }
 
-function Slider({ value, onChange, max = 5, step = 1, id }: SliderProps) {
+function Slider({ value = 100, onChange, max = 100, step = 20, id }: SliderProps) {
   return (
     <SliderPrimitive.Root
       value={[value]}

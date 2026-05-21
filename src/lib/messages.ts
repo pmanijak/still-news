@@ -10,9 +10,9 @@ const client = new Anthropic({
 
 export function stream(settings: NewsSettings, signal?: AbortSignal) {
 
-    const sentimentPercent = settings.sentiment * 20;
-    const sentimentInstructions =
-        `When finding news, report ${sentimentPercent}% good news.
+    const positivePercent = settings.positive;
+    const positiveInstructions =
+        `When finding news, report ${positivePercent}% good news.
          Don't indicate which news is good. If you can't find good 
          news immediately on the first attempt, that is ok, just 
          try again without telling me.`;
@@ -33,7 +33,7 @@ export function stream(settings: NewsSettings, signal?: AbortSignal) {
     messages: [
       {
         role: "user",
-        content: `What's the news, today? ${sentimentInstructions}`,
+        content: `What's the news, today? ${positiveInstructions}`,
       },
     ],
     model: "claude-haiku-4-5",

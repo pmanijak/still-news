@@ -1,7 +1,7 @@
 import SliderField from './components/SliderField';
 
 export type NewsSettings = {
-  sentiment: number
+  positive: number
 }
 
 type NewsSettingsProps = {
@@ -13,9 +13,9 @@ function NewsSettings({ value, onChange }: NewsSettingsProps) {
   return (
     <>
       <SliderField
-        label="Positive Sentiment"
-        value={value.sentiment}
-        onChange={(sentiment) => onChange({ ...value, sentiment })} />
+        label="Positive sentiment"
+        value={value.positive}
+        onChange={(positive) => onChange({ ...value, positive })} />
     </>);
 }
 
