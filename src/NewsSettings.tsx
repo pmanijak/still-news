@@ -1,15 +1,15 @@
 import SliderField from './components/SliderField';
 
-export type SettingsValue = {
+export type NewsSettings = {
   sentiment: number
 }
 
-type SettingsProps = {
-  value: SettingsValue,
-  onChange: (obj: SettingsValue) => void
+type NewsSettingsProps = {
+  value: NewsSettings,
+  onChange: (obj: NewsSettings) => void
 }
 
-function Settings({ value, onChange }: SettingsProps) {
+function NewsSettings({ value, onChange }: NewsSettingsProps) {
   return (
     <>
       <SliderField
@@ -19,4 +19,4 @@ function Settings({ value, onChange }: SettingsProps) {
     </>);
 }
 
-export default Settings;
+export default NewsSettings;

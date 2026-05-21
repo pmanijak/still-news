@@ -1,5 +1,5 @@
 import { Anthropic } from "@anthropic-ai/sdk/client.js";
-import type { SettingsValue } from '../Settings';
+import type { NewsSettings } from '../NewsSettings';
 
 const client = new Anthropic({
   // Put your Anthropic SDK key in a .env.local file,
@@ -8,7 +8,7 @@ const client = new Anthropic({
   dangerouslyAllowBrowser: true
 });
 
-export function stream(settings: SettingsValue, signal?: AbortSignal) {
+export function stream(settings: NewsSettings, signal?: AbortSignal) {
 
     const sentimentPercent = settings.sentiment * 20;
     const sentimentInstructions =

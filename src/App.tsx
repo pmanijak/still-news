@@ -1,7 +1,7 @@
 import { useState } from 'react'; 
 import useNews from './lib/useNews';
 import ReactMarkdown from 'react-markdown';
-import Settings from './Settings';
+import NewsSettings from './NewsSettings';
 
 function App() {
   const now = new Date().toLocaleDateString('en-US', { dateStyle: 'long' });
@@ -20,7 +20,7 @@ function App() {
       </main>
       
       <aside className="w-80 border-l border-gray-200 dark:border-gray-800 p-6 overflow-auto sticky top-0 h-screen">
-        <Settings
+        <NewsSettings
           value={settings}
           onChange={setSettings}
         />

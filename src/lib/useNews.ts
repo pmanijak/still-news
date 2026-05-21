@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { stream } from "./messages";
 
-import type { SettingsValue } from '../Settings';
+import type { NewsSettings } from '../NewsSettings';
 
-export default function (settings: SettingsValue) {
+export default function (settings: NewsSettings) {
   const noNews = "";
   const [news, setNews] = useState(noNews);
-  const { sentiment } = settings;
 
   useEffect(() => {
     setNews(noNews);
     const ctrl = new AbortController();
-    const res = stream({ sentiment }, ctrl.signal);
+    const res = stream(settings, ctrl.signal);
 
     res.on("text", (chunk) => {
       if (ctrl.signal.aborted)
@@ -20,7 +19,7 @@ export default function (settings: SettingsValue) {
     });
 
     return () => ctrl.abort();
-  }, [sentiment]);
+  }, [settings]);
 
   return news;
 }
