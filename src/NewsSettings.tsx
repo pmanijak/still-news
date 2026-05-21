@@ -1,7 +1,13 @@
 import SliderField from './components/SliderField';
+import Checkbox from './components/Checkbox';
+import { produce } from 'immer';
 
 export type NewsSettings = {
   positive: number
+  topics: {
+    label: string
+    selected: boolean
+  }[]
 }
 
 type NewsSettingsProps = {
@@ -16,6 +22,19 @@ function NewsSettings({ value, onChange }: NewsSettingsProps) {
         label="Positive sentiment"
         value={value.positive}
         onChange={(positive) => onChange({ ...value, positive })} />
+
+      <div className="space-y-3 mt-5">
+        {value.topics.map((topic, index) => (
+            <Checkbox
+              label={topic.label}
+              value={topic.selected}
+              onChange={(selected) =>
+                onChange(produce(value, (x) => {
+                  x.topics[index].selected = selected
+                }))}
+            />
+        ))}
+      </div>
     </>);
 }
 

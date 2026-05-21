@@ -17,6 +17,13 @@ export function stream(settings: NewsSettings, signal?: AbortSignal) {
          news immediately on the first attempt, that is ok, just 
          try again without telling me.`;
 
+    const topicsToInclude =
+        `In addition to a generals search, be sure to include news for the
+        following topics: ${settings.topics.map(x => x.selected ? x.label : '').join(', ')}`;
+
+    const topicsToNotInclude =
+        `Do not include news stories for the following topics: 
+        ${settings.topics.map(x => !x.selected ? x.label : '').join(', ')}`;
 
   return client.messages.stream({
     max_tokens: 4096,
@@ -33,7 +40,11 @@ export function stream(settings: NewsSettings, signal?: AbortSignal) {
     messages: [
       {
         role: "user",
-        content: `What's the news, today? ${positiveInstructions}`,
+        content: `What's the news, today?
+            ${positiveInstructions}
+            ${topicsToInclude}
+            ${topicsToNotInclude}
+            `
       },
     ],
     model: "claude-haiku-4-5",

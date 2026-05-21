@@ -6,7 +6,15 @@ import NewsSettings from './NewsSettings';
 function App() {
   const now = new Date().toLocaleDateString('en-US', { dateStyle: 'long' });
   
-  const [newsSettings, setNewsSettings] = useState({ positive: 100 });
+  const [newsSettings, setNewsSettings] = useState({ 
+    positive: 100,
+    topics: [
+      { label: "U.S. News", selected: true },
+      { label: "Politics", selected: false },
+      { label: "Markets", selected: false },
+      { label: "Sports", selected: false }
+    ]
+  });
   const news = useNews(newsSettings);
 
   return (
