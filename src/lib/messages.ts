@@ -12,7 +12,10 @@ export function stream(settings: NewsSettings, signal?: AbortSignal) {
 
     const positivePercent = settings.positive;
     const positiveInstructions =
-        `When finding news, report ${positivePercent}% good news.`;
+        `When finding news, at least ${positivePercent}% of the news
+        should have positive sentiment. If you find that challenging,
+        because there is not much positive news in your initial query,
+        broaden your search.`;
 
     const includeTopics = settings.topics
         .filter(x => x.selected)
