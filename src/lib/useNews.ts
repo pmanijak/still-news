@@ -3,14 +3,15 @@ import { stream } from "./messages";
 
 import type { NewsSettings } from '../NewsSettings';
 
-export default function (settings: NewsSettings) {
-  const noNews = "";
-  const [news, setNews] = useState(noNews);
+export default function useNews(settings: NewsSettings) {
+  const [news, setNews] = useState("");
 
   useEffect(() => {
-    setNews(noNews);
+    const noNews = '';
     const ctrl = new AbortController();
     const res = stream(settings, ctrl.signal);
+
+    res.on("connect", () => setNews(noNews));
 
     res.on("text", (chunk) => {
       if (ctrl.signal.aborted)
