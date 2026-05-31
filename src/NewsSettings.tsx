@@ -26,6 +26,7 @@ function NewsSettings({ value, onChange }: NewsSettingsProps) {
       <div className="space-y-3 mt-5">
         {value.topics.map((topic, index) => (
             <Checkbox
+              key={`settings-topic-${index}`}
               label={topic.label}
               value={topic.selected}
               onChange={(selected) =>
